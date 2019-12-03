@@ -1,0 +1,49 @@
+\documentclass[titel]{naklatex}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+% Blindtext für die Vorlage
+\usepackage{blindtext}
+
+% Zitationseinstellungen
+% \usepackage[backend=biber, style=bath]{biblatex}
+\usepackage[backend=biber, style=apa]{biblatex}
+\ExecuteBibliographyOptions{sorting=nty}
+\addbibresource{quellen.bib}
+
+% Akronyme/Abkürzungen und Glossareinträge importieren
+\loadglsentries{dokumente/0_akronyme.tex}
+\loadglsentries{dokumente/0_glossareintraege.tex}
+
+% Anhangsverzeichnis
+\newcommand{\anhangsverzeichnis}{Anhangsverzeichnis}
+\newlistof{anhangselement}{ahv}{\anhangsverzeichnis}
+\newcommand{\anhangselement}[1]
+{
+    \refstepcounter{anhangselement}
+    \addcontentsline{ahv}{anhangselement}
+    {\protect\numberline{\theanhangselement}#1}\par
+}
+
+% Dokument zusammenbauen
+\begin{document}
+	\begin{frontmatter}
+		\input{dokumente/0_deckblatt.tex}
+		% Abstract
+		\inhaltsverzeichnis
+		\abbildungsverzeichnis
+		\tabellenverzeichnis
+		\printglossary[type=\acronymtype]
+		\printglossary
+	\end{frontmatter}
+
+	\begin{mainmatter}
+		\input{dokumente/1_einleitung.tex}
+	\end{mainmatter}
+
+	\begin{backmatter}
+		\literaturverzeichnis
+		\input{dokumente/99_anhang.tex}
+		\input{dokumente/99_eidesstaatliche_erklaerung.tex}
+	\end{backmatter}
+\end{document}

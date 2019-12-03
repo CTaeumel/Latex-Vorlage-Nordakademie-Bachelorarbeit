@@ -1,0 +1,26 @@
+{
+    "git.autofetch": true,
+    "window.zoomLevel": 0,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.intellisense.package.enabled": true,
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.docker.image.latex": "danteev/texlive",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.autoClean.run": "onFailed",
+    "[latex]":{
+        "editor.wordWrap": "on"
+    },
+    "latex-workshop.chktex.enabled": true,
+    "latex-workshop.intellisense.citation.label": "title",
+    "latex-workshop.intellisense.citation.type": "browser",
+    "latex-workshop.intellisense.unimathsymbols.enabled": true,
+    "spellright.language": [
+        "de",
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ]
+}
