@@ -30,7 +30,7 @@
 
 % Seitenumbrüche per Section
 \RequirePackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
+\newcommand{\sectionbreak}{\cleardoublepage}
 
 % Kopf- und Fußzeile
 \RequirePackage{fancyhdr}
@@ -38,7 +38,7 @@
 \fancyhf{} 																	% alle Kopf- und Fußzeilenfelder bereinigen
 \renewcommand{\headrulewidth}{0pt} 											% obere Trennlinie entfernen
 \fancyfoot[R]{\thepage} 													% Seitennummer nach rechts schieben
-	
+
 % Seitennummerierung für die einzelnen Environments vorbereiten
 \newcommand{\romannumbering}{
 	\pagenumbering{Roman}
@@ -60,30 +60,35 @@
 
 % Verzeichnisbefehle ergänzen
 \newcommand{\inhaltsverzeichnis}{
-	\pagebreak
+	\sectionbreak
+	\phantomsection
 	\tableofcontents}
 
 \newcommand{\abbildungsverzeichnis}{
-	\pagebreak
+	\sectionbreak
+	\phantomsection
 	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
 	\addtocontents{lof}{\vskip 0.4cm}
 	\listoffigures}
 
 \newcommand{\tabellenverzeichnis}{
-	\pagebreak
+	\sectionbreak
+	\phantomsection
 	\addcontentsline{toc}{section}{Tabellenverzeichnis}
 	\addtocontents{lot}{\vskip 0.4cm}
 	\listoftables
 }
 
 \newcommand{\literaturverzeichnis}{
+	\sectionbreak
+	\phantomsection
 	\addcontentsline{toc}{section}{Literaturverzeichnis}
 	\printbibliography[title={Literaturverzeichnis}]
 }
 
 % Hyperref muss am Ende, allerdings vor Glossaries geladen werden
-% \RequirePackage[hidelinks]{hyperref}
-% \hypersetup{bookmarksnumbered}
+ \RequirePackage[hidelinks]{hyperref}
+ \hypersetup{bookmarksnumbered}
 % Hyperref funktioniert momentan nicht und ich habe noch nicht die Zeit gefunden, herauszufinden wieso das so ist
 
 % Glossar-Paket laden und konfigurieren

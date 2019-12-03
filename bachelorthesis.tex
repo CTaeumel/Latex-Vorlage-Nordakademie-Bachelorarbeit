@@ -29,11 +29,16 @@
 \begin{document}
 	\begin{frontmatter}
 		\input{dokumente/0_deckblatt.tex}
+		\sectionbreak
 		% Abstract
 		\inhaltsverzeichnis
 		\abbildungsverzeichnis
 		\tabellenverzeichnis
+		\clearpage
+		\phantomsection
 		\printglossary[type=\acronymtype]
+		\clearpage
+		\phantomsection
 		\printglossary
 	\end{frontmatter}
 
