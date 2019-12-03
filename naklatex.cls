@@ -32,6 +32,9 @@
 \RequirePackage{titlesec}
 \newcommand{\sectionbreak}{\cleardoublepage}
 
+% Sections unterstreichen
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
 % Kopf- und Fußzeile
 \RequirePackage{fancyhdr}
 \pagestyle{fancy} 															% eigener Seitenstil
@@ -39,10 +42,24 @@
 \renewcommand{\headrulewidth}{0pt} 											% obere Trennlinie entfernen
 \fancyfoot[R]{\thepage} 													% Seitennummer nach rechts schieben
 
+% Anhangsverzeichnis erstellen, sodass es befüllt werden kann
+\newcommand{\anhangsverzeichnisName}{Anhangsverzeichnis}
+\newlistof{anhangselement}{ahv}{\anhangsverzeichnisName}
+\newcommand{\anhangselement}[1]
+{
+    \refstepcounter{anhangselement}
+    \addcontentsline{ahv}{anhangselement}
+    {\protect\numberline{\theanhangselement}#1}\par
+}
+\newcommand{\addAnhangselement}[1]{
+	\phantomsection
+	\anhangselement{#1}
+}
+
 % Seitennummerierung für die einzelnen Environments vorbereiten
 \newcommand{\romannumbering}{
 	\pagenumbering{Roman}
-	\setcounter{page}{2}}
+	\setcounter{page}{1}}
 
 \newcommand{\arabicnumbering}{
 	\newcounter{frontmatter}
@@ -54,42 +71,82 @@
 	\pagenumbering{Roman}
 	\setcounter{page}{\value{frontmatter}}}
 
-\newenvironment{mainmatter}{\arabicnumbering}{\pagebreak}
-\newenvironment{frontmatter}{\romannumbering}{\pagebreak}
+\newenvironment{frontmatter}{\romannumbering}{\clearpage}
+\newenvironment{mainmatter}{\arabicnumbering}{\clearpage\phantomsection}
 \newenvironment{backmatter}{\romannumberingtwo}{}
 
 % Verzeichnisbefehle ergänzen
+\newcommand{\deckblatt}{
+	\input{dokumente/0_deckblatt.tex}
+	\clearpage
+	% \sectionbreak
+}
+
+\newcommand{\myabstract}{
+	\input{dokumente/0_abstract.tex}
+	% \sectionbreak
+}
+
 \newcommand{\inhaltsverzeichnis}{
+	\tableofcontents
 	\sectionbreak
 	\phantomsection
-	\tableofcontents}
+}
 
 \newcommand{\abbildungsverzeichnis}{
-	\sectionbreak
-	\phantomsection
 	\addcontentsline{toc}{section}{Abbildungsverzeichnis}
 	\addtocontents{lof}{\vskip 0.4cm}
-	\listoffigures}
-
-\newcommand{\tabellenverzeichnis}{
+	\listoffigures
 	\sectionbreak
 	\phantomsection
+}
+
+\newcommand{\tabellenverzeichnis}{
 	\addcontentsline{toc}{section}{Tabellenverzeichnis}
 	\addtocontents{lot}{\vskip 0.4cm}
 	\listoftables
+	\sectionbreak
+	\phantomsection
+}
+
+\newcommand{\glossar}{
+	\printglossary[type=\acronymtype]
+	\clearpage
+	\phantomsection
+}
+
+\newcommand{\acronyme}{
+	\printglossary
+	\clearpage
+	\phantomsection
 }
 
 \newcommand{\literaturverzeichnis}{
-	\sectionbreak
-	\phantomsection
 	\addcontentsline{toc}{section}{Literaturverzeichnis}
 	\printbibliography[title={Literaturverzeichnis}]
+	\clearpage
+	\phantomsection
+}
+
+\newcommand{\anhang}{
+	\input{dokumente/99_anhang.tex}
+	\clearpage
+	\phantomsection
+}
+
+\newcommand{\anhangsverzeichnis}{
+	\listofanhangselement
+	\clearpage
+	\phantomsection
+}
+
+\newcommand{\eidErklaerung}{
+	\input{dokumente/99_eidesstaatliche_erklaerung.tex}
 }
 
 % Hyperref muss am Ende, allerdings vor Glossaries geladen werden
- \RequirePackage[hidelinks]{hyperref}
- \hypersetup{bookmarksnumbered}
-% Hyperref funktioniert momentan nicht und ich habe noch nicht die Zeit gefunden, herauszufinden wieso das so ist
+\RequirePackage[hidelinks]{hyperref}
+\hypersetup{bookmarksnumbered}
 
 % Glossar-Paket laden und konfigurieren
 \RequirePackage[automake,nonumberlist,acronym,toc]{glossaries}
