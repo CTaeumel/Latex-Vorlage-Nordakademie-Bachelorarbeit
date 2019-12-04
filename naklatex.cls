@@ -43,7 +43,7 @@
 \fancyfoot[R]{\thepage} 													% Seitennummer nach rechts schieben
 
 % Anhangsverzeichnis erstellen, sodass es befüllt werden kann
-\newcommand{\anhangsverzeichnisName}{Anhangsverzeichnis}
+\newcommand{\anhangsverzeichnisName}{Anhang}
 \newlistof{anhangselement}{ahv}{\anhangsverzeichnisName}
 \newcommand{\anhangselement}[1]
 {
@@ -129,6 +129,12 @@
 }
 
 \newcommand{\anhang}{
+	\addtocontents{ahv}{\vskip 0.3cm}
+	\listofanhangselement
+	\addcontentsline{toc}{section}{Anhang}
+	\clearpage
+	\phantomsection	
+
 	\input{dokumente/99_anhang.tex}
 	\clearpage
 	\phantomsection
@@ -151,3 +157,4 @@
 % Glossar-Paket laden und konfigurieren
 \RequirePackage[automake,nonumberlist,acronym,toc]{glossaries}
 \makeglossaries
+\renewcommand{\glsgroupskip}{} % Zeilenabstand im Glossarverzeichis verringern
