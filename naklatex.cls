@@ -109,13 +109,13 @@
 	\phantomsection
 }
 
-\newcommand{\glossar}{
+\newcommand{\acronyme}{
 	\printglossary[type=\acronymtype]
 	\clearpage
 	\phantomsection
 }
 
-\newcommand{\acronyme}{
+\newcommand{\glossar}{
 	\printglossary
 	\clearpage
 	\phantomsection
