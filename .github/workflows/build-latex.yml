@@ -1,0 +1,30 @@
+name: Build LaTeX Document
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest-full
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Compile the LaTeX document
+      - name: Compile LaTeX Document
+        run: |
+          mkdir -p build
+          pdflatex -interaction=nonstopmode -output-directory=build bachelorthesis.tex
+
+      # Upload compiled PDF as an artifact
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bachelorthesis
+          path: build/bachelorthesis.pdf
