@@ -147,7 +147,7 @@
 }
 
 \newcommand{\eidErklaerung}{
-	\input{dokumente/99_eidesstaatliche_erklaerung.tex}
+	\input{dokumente/99_eidesstattliche_erklaerung.tex}
 }
 
 % Hyperref muss am Ende, allerdings vor Glossaries geladen werden
